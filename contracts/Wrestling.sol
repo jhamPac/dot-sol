@@ -18,8 +18,8 @@ contract Wrestling {
 	uint private wrestler2Deposit;
 
 	bool public gameFinished;
-    address public theWinner;
-    uint gains;
+  address public theWinner;
+  uint gains;
 
     /**
     * The logs that will be emitted in every step of the contract's life cycle
@@ -53,7 +53,7 @@ contract Wrestling {
     function wrestle() public payable {
     	require(!gameFinished && (msg.sender == wrestler1 || msg.sender == wrestler2));
 
-    	if(msg.sender == wrestler1) {
+    	if (msg.sender == wrestler1) {
     		require(wrestler1Played == false);
     		wrestler1Played = true;
     		wrestler1Deposit = wrestler1Deposit + msg.value;
@@ -62,13 +62,13 @@ contract Wrestling {
     		wrestler2Played = true;
     		wrestler2Deposit = wrestler2Deposit + msg.value;
     	}
-    	if(wrestler1Played && wrestler2Played) {
+    	if (wrestler1Played && wrestler2Played) {
     		if(wrestler1Deposit >= wrestler2Deposit * 2) {
     			endOfGame(wrestler1);
     		} else if (wrestler2Deposit >= wrestler1Deposit * 2) {
     			endOfGame(wrestler2);
     		} else {
-                endOfRound();
+        	endOfRound();
     		}
     	}
     }
