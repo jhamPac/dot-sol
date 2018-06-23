@@ -4,6 +4,8 @@ contract Adoption {
 
   address[16] public adopters;
 
+  constructor() public {}
+
   function adopt(uint petId) public returns (uint) {
     require(petId >= 0 && petId <= 15);
 
