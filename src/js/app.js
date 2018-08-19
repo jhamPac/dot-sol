@@ -24,10 +24,11 @@ App = {
   },
 
   initWeb3: function() {
+    // MetaMask etherum browsers provide a web3 object
     if (typeof web3 !== 'undefined') {
       App.web3Provider = web3.currentProvider;
     } else {
-      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
+      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
     }
     web3 = new Web3(App.web3Provider);
 
@@ -35,9 +36,13 @@ App = {
   },
 
   initContract: function() {
-    /*
-     * Replace me...
-     */
+    $.getJSON('Adoption.json', function(data) {
+      var AdoptionArtifact = data;
+      App.contracts.Adoption = TruffleContract(AdoptionArtifact);
+
+      App.contracts.Adoption.setProvider(App.web3Provider);
+      return App.markAdopted();
+    });
 
     return App.bindEvents();
   },
@@ -47,9 +52,7 @@ App = {
   },
 
   markAdopted: function(adopters, account) {
-    /*
-     * Replace me...
-     */
+    
   },
 
   handleAdopt: function(event) {
